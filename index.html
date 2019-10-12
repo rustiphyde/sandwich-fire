@@ -1,13 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Sandwich Fire</title>
-</head>
-<body>
-  <img src="./sandwich-fire-logo.png" width="160" alt="Sandwich Fire Logo"/>
-
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/0.5.0/modern-normalize.css"
+      integrity="sha256-wOIgn5DueqkvX+IpwWJkwzQblHz45CGXEOjju1aHqFg="
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Baloo|Palanquin+Dark&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Sandwich Fire</title>
+  </head>
+  <body class="container">
+    <h1>Sandwich Fire</h1>
+    <img
+      src="./sandwich-fire-logo.png"
+      width="128"
+      alt="Sandwich Fire Logo"
+      class="logo"
+    />
+    <div class="container form-box">
+      <form id="signup-form">
+        <label for="email">Email</label>
+        <hr class="bar"  />
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="EMAIL ADDRESS"
+        />
+        <hr class="bar" />
+        <label for="password">Password</label>
+        <hr class="bar"  />
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="PASSWORD"
+        />
+        <hr class="bar" />
+        <br>
+        <button type="submit" class="btn">LOGIN</button>
+      </form>
+    </div>
+  </body>
 </html>
