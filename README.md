@@ -21,7 +21,7 @@ Now, type ```npm install --save axios``` to add axios to your project's dependen
 
 **Step 6.** Type ```firebase login``` and hit **Enter**, then type **y** or **n** (up to you) and hit **Enter**. This will open a pronpt from Google asking you to choose an account and accept some terms. Click **Allow** and you will be logged in.
 
-**Step 7.** In the same terminal type ```firebase init`` and hit **Enter**. Type **y** and hit **Enter**. Using the arrow keys on your keyboard, press **down** twice to highlight Functions, hit the **Space Bar** to select Functions and hit **Enter**. Hit **Enter** again to choose **Use an existing project**. You should have only one project since you've never used Firebase before, so just hit **Enter** again. We will be using JavaScript for this lesson so hit **Enter** again to choose that option. Next type **y** or **n** (up to you whether you want to have ESLint) and hit **Enter**. Hit **y** to install dependencies and hit **Enter**. You now have your local project connected to your Firebase project.
+**Step 7.** In the same terminal type ```firebase init``` and hit **Enter**. Type **y** and hit **Enter**. Using the arrow keys on your keyboard, press **down** twice to highlight Functions, hit the **Space Bar** to select Functions and hit **Enter**. Hit **Enter** again to choose **Use an existing project**. You should have only one project since you've never used Firebase before, so just hit **Enter** again. We will be using JavaScript for this lesson so hit **Enter** again to choose that option. Next type **y** or **n** (up to you whether you want to have ESLint) and hit **Enter**. Hit **y** to install dependencies and hit **Enter**. You now have your local project connected to your Firebase project.
 
 
 
