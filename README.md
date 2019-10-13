@@ -89,41 +89,61 @@ admin.initializeApp({
 Underneath all the require statements and initializers but before the exports.api declaration type the following code
 
 ```
+// Sign Up Route
 app.post("/signup", (req, res) => {
-  const newUser = { 
+  const newUser = {
     email: req.body.email,
     password: req.body.password,
-    epithet: req.body.epithet
- };
- db.doc(`/Users/${newUser.epithet}`)
-      .get()
-      .then(doc => {
-        if (doc.exists) {
-          return res
-            .status(400)
-            .json({ epithet: "This Epithet is already taken." });
-        } else {
-          return firebase
-            .auth()
-            .createUserWithEmailAndPassword(newUser.email, newUser.password);
-        }
-      })
-      .then(data => {
-        return data.user.getIdToken();
-      })
-      .then(token => {
-        return res.status(201).json({ token });
-      })
-      .catch(err=> {
-          console.error(err);
-          return res.status(500).json({ error: err.code });
-      })
-  });
+    epithet: req.body.epithet.replace(/\s/g, "-").toLowerCase()
+  };
+
+  // TODO validate data
+  let token, userId;
+  db.doc(`/Users/${newUser.epithet}`)
+    .get()
+    .then(doc => {
+      if (doc.exists) {
+        return res
+          .status(400)
+          .json({ epithet: "This Epithet is already taken." });
+      } else {
+        return firebase
+          .auth()
+          .createUserWithEmailAndPassword(newUser.email, newUser.password);
+      }
+    })
+    .then(data => {
+      userId = data.user.uid;
+      return data.user.getIdToken();
+    })
+    .then(idToken => {
+      token = idToken;
+      const userCredentials = {
+        epithet: newUser.epithet,
+        email: newUser.email,
+        createdAt: new Date().toISOString(),
+        userId
+      };
+      return db.doc(`/Users/${newUser.epithet}`).set(userCredentials);
+    })
+    .then(() => {
+      return res.status(201).json({ token });
+    })
+    .catch(err => {
+      console.error(err);
+      if (err.code === "auth/email-already-in-use") {
+        return res.status(400).json({ email: "Email is already in use" });
+      } else {
+        return res.status(500).json({ general: "Something went wrong, please try again" });
+      }
+    });
+});
   ```
+  Now in your terminal, make sure you are still in your **functions** directory and type ```firebase deploy```.
 
   Now we are ready to use **Postman**.
 
-  
+
 
 
 
