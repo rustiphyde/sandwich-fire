@@ -1,6 +1,12 @@
 # **Sandwich Fire**
 
-**Sandwich Fire** is a basic practice project created to teach **Savvy Coders** students how to use **Firebase**. It is written in _HTML5, CSS3,_ and _JavaScript ES6_. It is open for anyone to use for the purpose of learning **Firebase**. So fork it, clone it, recreate it, and completely revamp it at your leisure ;
+![Sandwich Fire Logo](/sandwich-fire-logo.png)
+
+**Sandwich Fire** is a basic practice project created to teach **Savvy Coders** students how to use **Firebase**. It is written in _HTML5, CSS3,_ and _JavaScript ES6_. 
+
+It utilizes **Firebase Authentication, Cloud Firestore, Functions, and Storage**. Students will learn how to create a Login, a Sign-Up, and a Users page on a website that let's people share Sandwich Recipes. 
+
+It is open for anyone to use for the purpose of learning **Firebase**. So fork it, clone it, recreate it, and completely revamp it at your leisure ;
 
 You're welcome, &mdash; _Rusty Hoppins, 10/11/2019_ ;
 
@@ -31,9 +37,11 @@ admin.initializeApp()```.
 
 **Step 10.** Next, we need to type ```npm install --save firebase```. This is necessary to use the Firebase Auth methods, which we will now dive into.
 
-## <ins>**Authentication</ins>**
+## <ins>**Authentication**</ins>
 
-**Step 1.** In the Firebase console sidebar toggle open the **Develop** tab and click on **Authentication** which will open up the Authentication Manager. Click the button marked **Set up sign-in method**. We will be using the first option **Email/Password** which by default is Disabled along with the other methods. Click on **Email/Password** and a modal will open for enabling the sign-in method. There are two switches to enable sign-in methods here, we only need to make sure the first switch is turned on to enable the  sign-in method we'll be using. Once it has been enabled, click **Save**. Notice the other methods that Firebase offers, feel free to explore them in your own time
+**Step 1.** In the Firebase console sidebar, toggle open the **Develop** tab and click on **Authentication** which will open up the Authentication Manager. Click the button marked **Set up sign-in method**. We will be using the first option **Email/Password** which by default is Disabled along with the other methods. Click on **Email/Password** and a modal will open for enabling the sign-in method. There are two switches to enable sign-in methods here, we only need to make sure the first switch is turned on to enable the  sign-in method we'll be using. Once it has been enabled, click **Save**. Notice the other methods that Firebase offers, feel free to explore them in your own time, but for right now we have the method we require enabled so it's time to put it to use.
+
+**Step 2.** 
 
 
 
