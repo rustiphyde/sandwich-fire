@@ -40,20 +40,90 @@ admin.initializeApp()```.
 
 **Note:** We will be utilizing the built-in Firebase methods for Login, Sign-up and Logout but we will also be creating a username called an **epithet** which is going to be stored along with some other information in Cloud Firestore under a collection called Users which will be dynamically created and added to when users sign up. First we need to setup some routes so that we can fetch, post, update, and delete data.
 
-**Step 12.** In your functions directory, open your index.js file and add the following code to it: ```const app = require('express')();```. Underneath that type ```exports.api = functions.https.onRequest(app);```. This piece of code makes it easier to wrap all of our functions into nice little routes to use with axios later. At the top of the code on line 3 type the following: ```const config = require('./util/config');```. This is the file we are going to create now to store our configuration information in a safe place.
+**Step 12.** In your functions directory, open your index.js file and add the following code to it: 
+```
+const app = require('express')()
+
+
+exports.api = functions.https.onRequest(app);
+``` 
+This piece of code makes it easier to wrap all of our functions into nice little routes to use with axios later. At the top of the code on line 3 type the following: 
+```
+const config = require('./util/config');
+``` 
+This is the file we are going to create now to store our configuration information in a safe place.
 
 **Step 13.** In your terminal, make sure you in your functions directory and type the following: ```mkdir util``` and hit **Enter**.
 After that type ```touch util/config.js```. Before we do anything with this file we need to make sure it is in our **.gitignore** file so that it doesn't get added to Github. With that in mind, open your **.gitignore** file under your **functions** directory and type ```util/config.js```. Now if we commit and push to Github that file will not be included. Open your Firebase console and click on the **Gear Icon** next to the words **Project Overview**. In the dropdown, choose **Project Settings** and then scroll all the way down to the information about your firebaseConfig object. Click inside the radio button that says **Config** and click on the **Copy Icon** in the bottom right-hand corner to copy the information to your clipboard. Now navigate to your **config.js** file in your **util** directory in VS Code and type the following: ```module.exports =```. Then press **Ctrl+V**(on Windows) or **Cmd+V** (on Mac) to paste your configuration information into the file. Delete the section that says ```const firebaseConfig =```.
 
-**Step 14.** Now, navigate back to your **index.js** file in your **functions** directory. Under the code where we required and called express, type the following: ```const cors = require('cors');```.
-Then directly under that type ```app.use(cors());```. We are setting up the communication between our app, Firebase, and other applications such as **Postman**. We need one more piece of the puzzle before we can use Postman. 
+**Step 14.** Now, navigate back to your **index.js** file in your **functions** directory. Under the code where we required and called express, type the following: 
+```
+const cors = require('cors');
+app.use(cors());
+```
+We are setting up the communication between our app, Firebase, and other applications such as **Postman**. We need one more piece of the puzzle before we can use Postman. 
 
 **Step 15.** In your terminal, make sure you are in your **functions** directory and type ```touch serviceAccountKey.json```.
 You immediately need to add this file to your **.gitignore** in your **functions** directory as well. Now you need to open Firebase back up and on the same page you got the config information scroll to the top and click on the option **Service accounts**. Once that opens, click the button that says **Generate new private key**. You will notice a file downloaded to your machine. Right-click on the file in your Downloads and choose **Open**. This should open the file in your VS Code. Press **Ctrl+A** (on Windows) or **Cmd+A** (on Mac) to select all. Then press **Ctrl+X** (on Windows) or **Cmd+X** (on Mac) to cut the entirety of the file to the clipboard. You no longer need this file so you can delete it whenever you want to. Now open up the newly created **serviceAccountKey.json** file and press **Ctrl+V** (on Windows) or **Cmd+V** (on Mac) to paste the information you just cut into the new file. 
 
+**Step 16.** Navigate back to your **index.js** file in your **functions** directory and add the following code directly under the admin require: 
+```
+const serviceAccount = require('./serviceAccountKey.json');
 
+admin.initializeApp({ 
+  credential: admin.credential.cert(serviceAccount), 
+  databaseURL: **WHATEVER YOUR DATABASE URL IS IN YOUR CONFIG.JS FILE** 
+  });
+  ``` 
+  Afterwards, underneath the ```const app``` declaration type the following: 
+  ```
+  const firebase = require('firebase');
+  firebase.initializeApp(config);
 
+  const db = admin.firestore();
+  ``` 
+  This creates a nice abbreviation for all that code. We are now ready to start our first function.
 
+## Function 1 - **Sign Up Route**
+
+Underneath all the require statements and initializers but before the exports.api declaration type the following code
+
+```
+app.post("/signup", (req, res) => {
+  const newUser = { 
+    email: req.body.email,
+    password: req.body.password,
+    epithet: req.body.epithet
+ };
+ db.doc(`/Users/${newUser.epithet}`)
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          return res
+            .status(400)
+            .json({ epithet: "This Epithet is already taken." });
+        } else {
+          return firebase
+            .auth()
+            .createUserWithEmailAndPassword(newUser.email, newUser.password);
+        }
+      })
+      .then(data => {
+        return data.user.getIdToken();
+      })
+      .then(token => {
+        return res.status(201).json({ token });
+      })
+      .catch(err=> {
+          console.error(err);
+          return res.status(500).json({ error: err.code });
+      })
+  });
+  ```
+
+  Now we are ready to use **Postman**.
+
+  
 
 
 
