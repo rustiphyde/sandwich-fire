@@ -2,8 +2,44 @@ body {
   background-color: #dbdbc0;
 }
 
+.nav-container {
+  display: flex;
+  align-items: center;
+  background-color: #644f28;
+  width: 100%;
+}
+
+nav > ul {
+  justify-content: space-evenly;
+  list-style: none;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+li {
+  display: inline-block;
+  list-style: none;
+  padding: 16px;
+}
+
+ul {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+a {
+  text-decoration: none;
+  font-family: 'Baloo', cursive;
+  color: #dbdbc0;
+}
+
+a:hover {
+  color: #ff9800;
+}
+
 h1 {
   text-align: center;
+  margin-block-start: 0.2rem;
   margin-block-end: 0.1em;
   font-size: 3rem;
   font-family: 'Baloo', cursive;
