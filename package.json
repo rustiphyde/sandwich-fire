@@ -4,7 +4,7 @@
   "description": "**Sandwich Fire** is a basic practice project created to teach **Savvy Coders** students how to use **Firebase**. It is written in _HTML5, CSS3,_ and _JavaScript ES6_. It is open for anyone to use for the purpose of learning **Firebase**. So fork it, clone it, recreate it, and completely revamp it at your leisure ;",
   "main": "index.js",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "dayjs": "^1.8.16",
     "lodash": "^4.17.15",
     "navigo": "^7.1.2"
